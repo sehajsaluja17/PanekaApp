@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 export default function AboutScreen({ navigation }) {
     return (

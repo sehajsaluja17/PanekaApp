@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 export default function HomeScreen({ navigation }) {
@@ -70,9 +70,8 @@ export default function HomeScreen({ navigation }) {
     image: {
       width: 300,
       height: 300,
-      borderRadius: 5,
+      borderRadius: 15,
       alignContent: 'center',
       justifyContent: 'center'
     },
   });
-  

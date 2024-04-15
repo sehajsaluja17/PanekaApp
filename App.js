@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import { Settings, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -8,7 +8,6 @@ import FixtureScreen from "./Screens/FixtureScreen";
 import StandingScreen from "./Screens/StandingScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "./Screens/ProfileScreen";
-import SettingsScreen from "./Screens/SettingsScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AboutScreen from "./Screens/AboutScreen";
 import * as Font from 'expo-font';
@@ -16,6 +15,7 @@ import { useEffect, useState } from "react";
 import ForumScreen from "./Screens/ForumScreen";
 import NewsScreen from "./Screens/NewsScreen";
 import ClubScreen from "./Screens/ClubScreen";
+import DrawerContent from "./DrawerContent";
 
 async function loadFonts() {
   await Font.loadAsync({
@@ -41,11 +41,11 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   return(
-      <Drawer.Navigator screenOptions={{headerStyle:{backgroundColor:'#E73725'}, drawerLabelStyle:{fontSize:20,fontFamily:'JockeyOne'}, headerTintColor:'#fff', headerTitleStyle:{fontFamily:'JockeyOne', fontSize:25}, drawerActiveTintColor:'#E73725'}}>
+      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props}/>} screenOptions={{headerStyle:{backgroundColor:'#E73725'}, drawerLabelStyle:{fontSize:20,fontFamily:'JockeyOne'}, headerTintColor:'#fff', headerTitleStyle:{fontFamily:'JockeyOne', fontSize:25}, drawerActiveTintColor:'#E73725'}}>
         <Drawer.Screen name="Home" component={HomeScreen} options={{}}/>
         <Drawer.Screen name="Fixture" component={FixtureScreen} options={{}}/>
         <Drawer.Screen name="Standing" component={StandingScreen} options={{}}/>
-        <Drawer.Screen name="Forum" component={ForumScreen} options={{}}/>
+        {/* <Drawer.Screen name="Forum" component={ForumScreen} options={{}}/> */}
         <Drawer.Screen name="News" component={NewsScreen} options={{}}/>
         <Drawer.Screen name="Clubs" component={ClubScreen} options={{}}/>
         <Drawer.Screen name="About Us" component={AboutScreen} options={{}}/>
@@ -71,7 +71,7 @@ const TabNavigator = () => {
       <Tab.Navigator screenOptions={{headerStyle:{backgroundColor:'#E73725'},headerTintColor:'#fff', tabBarActiveTintColor:'#E73725', tabBarLabelStyle:{fontSize:15, fontFamily:'JockeyOne'},headerTitleStyle:{fontSize:35, color:'#000', fontFamily:'JockeyOne'}}}>
         <Tab.Screen name="Profile" component={ProfileScreen} options={{tabBarIcon: () => <Ionicons name="person" size={25}/>,}}/>
         <Tab.Screen name="PANEKA" component={DrawerNavigator} options={{tabBarIcon: () => <Ionicons name="home" size={25}/>, tabBarLabel:"Home"}}/>
-        <Tab.Screen name="Settings" component={SettingsScreen} options={{tabBarIcon: () => <Ionicons name="settings" size={25}/>,}}/>
+        <Tab.Screen name="Forum" component={ForumScreen} options={{tabBarIcon: () => <Ionicons name="chatbubbles" size={25}/>,}}/>
       </Tab.Navigator>
   )
 }
