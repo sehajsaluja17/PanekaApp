@@ -16,6 +16,7 @@ import ForumScreen from "./Screens/ForumScreen";
 import NewsScreen from "./Screens/NewsScreen";
 import ClubScreen from "./Screens/ClubScreen";
 import DrawerContent from "./DrawerContent";
+import LogInScreen from "./Screens/LogInScreen";
 
 async function loadFonts() {
   await Font.loadAsync({
@@ -23,7 +24,7 @@ async function loadFonts() {
   });
 }
 
-// const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
 // export default function App() {
   
@@ -103,7 +104,10 @@ export default function App(){
     // </NavigationContainer>
 
     <NavigationContainer>
-      <TabNavigator/>
+      <Stack.Navigator initialRouteName="TabNavigator" screenOptions={{headerShown: false}}>
+        <Stack.Screen name="TabNavigator" component={TabNavigator} />
+        <Stack.Screen name="Login" component={LogInScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }

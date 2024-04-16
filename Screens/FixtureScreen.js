@@ -1,3 +1,4 @@
+//FixtureScreen.js
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
