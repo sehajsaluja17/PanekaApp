@@ -19,7 +19,7 @@ export default function LogInScreen({ navigation }) {
       const response = await axios.post('http://192.168.1.5:1337/login', { user, pwd });
       console.log(response.data);
       // Handle successful login, navigate to home page
-      navigation.navigate('Profile');
+      navigation.navigate('Forum');
     } catch (error) {
       console.error('Login failed:', error.message);
       if (error.response && error.response.data) {

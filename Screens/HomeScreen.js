@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, Button, ActivityIndicator, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, Button, ActivityIndicator, TouchableOpacity, useWindowDimensions, Linking } from 'react-native';
 import axios from 'axios';
 import Carousel from 'react-native-snap-carousel';
 
 export default function HomeScreen({ navigation }) {
   const data = [
-    { imageUrl: 'https://panenka-two.vercel.app/static/media/news2.9acdd30483fd196fc698.webp' },
-    { imageUrl: 'https://panenka-two.vercel.app/static/media/news3.b81351bc7d61008a00de.webp' },
-    { imageUrl: 'https://panenka-two.vercel.app/static/media/news1.5a2b812b9a21c15b0887.webp' },
+    { imageUrl: 'https://panenka-two.vercel.app/static/media/news1.5a2b812b9a21c15b0887.webp', url: 'https://www.goal.com/en-in/lists/joel-matip-winners-losers-nine-man-liverpool-blow-it-klopp-var/blt1d50c084b7891c7b' },
+    { imageUrl: 'https://panenka-two.vercel.app/static/media/news2.9acdd30483fd196fc698.webp', url: 'https://www.goal.com/en-in/lists/man-utd-player-ratings-vs-crystal-palace-marcus-rashford-rasmus-hojlund/bltba89b3f4314a691c' },
+    { imageUrl: 'https://panenka-two.vercel.app/static/media/news3.b81351bc7d61008a00de.webp', url: 'https://www.goal.com/en-in/lists/man-city-player-ratings-vs-wolves-erling-haaland-julian-alvarez/blte93c876980382439' },
     // Add more items as needed
   ];
 
@@ -38,13 +38,13 @@ export default function HomeScreen({ navigation }) {
   }, []);
 
   const renderItem = ({ item, index }) => {
-    const handlePress = () => {
+    const handlePress = (url) => {
       // Navigate to another screen when the carousel item is pressed
-      navigation.navigate('Profile');
+      Linking.openURL(url); 
     };
 
     return (
-      <TouchableOpacity onPress={handlePress} style={styles.item}>
+      <TouchableOpacity onPress={() => handlePress(item.url)} style={styles.item}>
         <Image
           source={{ uri: item.imageUrl }}
           style={[styles.image, { width: screenWidth - 90, height: screenHeight * 0.2 }]} // Adjust the width dynamically
