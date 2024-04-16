@@ -21,7 +21,7 @@ export default function LogInScreen({ navigation }) {
       console.log(response.data.accessToken);
       await AsyncStorage.setItem('accessToken',response.data.accessToken);
       // Handle successful login, navigate to home page
-      navigation.navigate('Profile');
+      navigation.navigate('Forum');
     } catch (error) {
       console.error('Login failed:', error.message);
       if (error.response && error.response.data) {
