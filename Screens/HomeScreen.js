@@ -5,6 +5,7 @@ import Carousel from 'react-native-snap-carousel';
 import FixturesHome from '../Components/FixturesHome'; 
 import StandingsHome from '../Components/StandingsHome';
 import { FANTASYCONTENT } from '../Components/FantasyContent';
+import FantasyTemplate from '../Components/FantasyTemplate';
 
 
 export default function HomeScreen({ navigation }) {
@@ -58,25 +59,6 @@ export default function HomeScreen({ navigation }) {
     );
   };
 
-  // const renderFantasyNews = () => {
-  //   return (
-  //     <View>
-  //       {FANTASYCONTENT.map((item, index) => (
-  //         <TouchableOpacity key={index} onPress={() => Linking.openURL(item.link)} style={styles.item}>
-  //           <Image
-  //             source={{ uri: item.image }}
-  //             style={styles.image}
-  //             resizeMode="cover"
-  //           />
-  //           <View style={styles.description}>
-  //             <Text style={styles.desc}>{item.desc}</Text>
-  //           </View>
-  //         </TouchableOpacity>
-  //       ))}
-  //     </View>
-  //   );
-  // };
-
   return (
     <View style={styles.container}>
       {loading ? (
@@ -119,10 +101,13 @@ export default function HomeScreen({ navigation }) {
           <View style={styles.fantasyTitle}>
             <Text style={[styles.text, {fontSize:25}]}>Fantasy News</Text>
           </View>
+          <View style={styles.fantasyContainer}>
+              {FANTASYCONTENT.map((fantasyTemplate) => (
+                <FantasyTemplate key={fantasyTemplate.id} data={fantasyTemplate} />
+              ))}
+          </View>
           
           
-          {/* Render Fantasy News
-          {renderFantasyNews()} */}
                     
         </ScrollView>
       )}
