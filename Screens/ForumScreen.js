@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function ForumScreen () {
+const ForumScreen = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://192.168.1.5:1337/posts');
+        const accessToken = await AsyncStorage.getItem('accessToken');
+        const response = await axios.get('http://192.168.228.160:1337/posts', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        });
         setPosts(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -18,21 +25,39 @@ export default function ForumScreen () {
     fetchPosts();
   }, []);
 
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('accessToken');
+      // You can navigate to the login screen or any other desired screen
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   const renderItem = ({ item }) => (
     <View style={styles.post}>
-      <Text style={styles.postAuthor}>{item.author}</Text>
-      <Text style={styles.postContent}>{item.content}</Text>
-      <View style={styles.postInfo}>
-        <Text style={styles.postUpvotes}>Upvotes: {item.upvotes}</Text>
-        <Text style={styles.postComments}>Comments: {item.comments}</Text>
-        <Text style={styles.postTime}>{item.time}</Text>
-      </View>
+      <Text style={styles.postTitle}>{item.title}</Text>
+      <Text style={styles.postAuthor}>Author: {item.author.username}</Text>
+      <Text style={styles.postContent}>Upvotes: {item.upvotes.length}</Text>
+      <Text style={styles.postContent}>Time: {new Date(item.time).toLocaleString()}</Text>
+      {/* Render other post details */}
     </View>
   );
-
+  
   return (
     <View style={styles.container}>
-      <FlatList data={posts} renderItem={renderItem} keyExtractor={item => item.id} />
+      <View style={styles.header}>
+        <Text style={styles.title}>Forum</Text>
+      </View>
+      <View style={styles.buttonsContainer}>
+        <Button title="Create Post" onPress={() => {}} />
+        <Button title="Logout" onPress={handleLogout} />
+      </View>
+      <FlatList
+        data={posts}
+        renderItem={renderItem}
+        keyExtractor={(item) => item._id}
+      />
     </View>
   );
 };
@@ -43,6 +68,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
   },
+  header: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
   post: {
     marginBottom: 20,
     padding: 15,
@@ -51,23 +89,17 @@ const styles = StyleSheet.create({
   },
   postAuthor: {
     fontSize: 16,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
   },
   postContent: {
     fontSize: 14,
     marginBottom: 5,
   },
-  postInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  postUpvotes: {
-    fontSize: 12,
-  },
-  postComments: {
-    fontSize: 12,
-  },
-  postTime: {
-    fontSize: 12,
-  },
+  postTitle:{
+    fontSize: 16,
+    fontWeight:'bold'
+  }
+  // Add styles for other post details
 });
+
+export default ForumScreen;
