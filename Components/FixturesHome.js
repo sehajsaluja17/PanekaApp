@@ -27,7 +27,7 @@ const FixturesHome = () => {
 
   return (
     <View style={styles.fixturePage}>
-      <Text style={styles.fixtureTitle}>Fixtures</Text>
+      <Text style={[{fontSize:25}, styles.text]}>Fixtures</Text>
       <ScrollView style={styles.fixtureList}>
         {fixturesData && fixturesData.response ? (
           <View style={styles.fixtureCards}>
@@ -65,6 +65,11 @@ const FixturesHome = () => {
 }
 
 const styles = StyleSheet.create({
+  text: {
+    flex: 1,
+    fontFamily: 'JockeyOne',
+    textAlign: 'center'
+  },
   fixturePage: {
     padding: 20,
     flex: 1,
@@ -72,7 +77,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   fixtureTitle: {
-    fontFamily: 'JockeyOne',
     marginTop: 50,
     textAlign: 'center',
     fontSize: 25,

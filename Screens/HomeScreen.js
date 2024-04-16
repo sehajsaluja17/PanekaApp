@@ -4,7 +4,7 @@ import axios from 'axios';
 import Carousel from 'react-native-snap-carousel';
 import FixturesHome from '../Components/FixturesHome'; 
 import StandingsHome from '../Components/StandingsHome';
-
+import { FANTASYCONTENT } from '../Components/FantasyContent';
 
 
 export default function HomeScreen({ navigation }) {
@@ -58,6 +58,25 @@ export default function HomeScreen({ navigation }) {
     );
   };
 
+  // const renderFantasyNews = () => {
+  //   return (
+  //     <View>
+  //       {FANTASYCONTENT.map((item, index) => (
+  //         <TouchableOpacity key={index} onPress={() => Linking.openURL(item.link)} style={styles.item}>
+  //           <Image
+  //             source={{ uri: item.image }}
+  //             style={styles.image}
+  //             resizeMode="cover"
+  //           />
+  //           <View style={styles.description}>
+  //             <Text style={styles.desc}>{item.desc}</Text>
+  //           </View>
+  //         </TouchableOpacity>
+  //       ))}
+  //     </View>
+  //   );
+  // };
+
   return (
     <View style={styles.container}>
       {loading ? (
@@ -91,8 +110,20 @@ export default function HomeScreen({ navigation }) {
           {/* StandingsHome component */}
           <StandingsHome standingsData={standingsData} />
 
+
+          {/* Blank line */}
+          <View style={{ marginVertical: 20 }} />
+
+
           {/* Fantasy News */}
+          <View style={styles.fantasyTitle}>
+            <Text style={[styles.text, {fontSize:25}]}>Fantasy News</Text>
+          </View>
           
+          
+          {/* Render Fantasy News
+          {renderFantasyNews()} */}
+                    
         </ScrollView>
       )}
     </View>

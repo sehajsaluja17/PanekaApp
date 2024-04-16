@@ -5,44 +5,44 @@ import { View, Text, StyleSheet,Button, Image } from 'react-native';
 const StandingsHome = ({ standingsData }) => {
   return (
     <View style={styles.tableContainer}>
-            <Text style={[{fontSize: 25},styles.tableTitle, styles.text]}>Standings</Text>          
+      <Text style={[{fontSize: 25},styles.tableTitle, styles.text]}>Standings</Text>          
 
-            {/* Table Data */}
-            {standingsData && standingsData.response && standingsData.response[0] && standingsData.response[0].league && standingsData.response[0].league.standings ? (
-            <View style={styles.container}>
-              {/* Table Headings */}
-              <View style={[styles.row, styles.headingRow]}>
-                <Text style={[styles.header, styles.headingText, { flex: 2 }]}>Pos</Text>
-                <Text style={[styles.header, styles.headingText, { flex: 3 }]}>Team</Text>
-                <Text style={[styles.header, styles.headingText, { flex: 2 }]}>Matches Played</Text>
-                <Text style={[styles.header, styles.headingText, { flex: 2 }]}>Points</Text>
+      {/* Table Data */}
+      {standingsData && standingsData.response && standingsData.response[0] && standingsData.response[0].league && standingsData.response[0].league.standings ? (
+      <View style={styles.container}>
+        {/* Table Headings */}
+        <View style={[styles.row, styles.headingRow]}>
+          <Text style={[styles.header, styles.headingText, { flex: 2 }]}>Pos</Text>
+          <Text style={[styles.header, styles.headingText, { flex: 3 }]}>Team</Text>
+          <Text style={[styles.header, styles.headingText, { flex: 2 }]}>Matches Played</Text>
+          <Text style={[styles.header, styles.headingText, { flex: 2 }]}>Points</Text>
+        </View>
+        
+        {/* Table Data */}
+        {standingsData.response[0].league.standings[0].map((team, index) => (
+          team.rank < 11 && (
+            <View key={team.team.id} style={[styles.row, index % 2 === 0 ? styles.lightGrayRow : {}]}>
+              <Text style={[styles.data, { flex: 1, textAlign: 'center' }, styles.text]}>{team.rank}</Text>
+              <View style={[styles.team, { flex: 3, alignItems: 'center' }, styles.text]}>
+                <Image source={{ uri: team.team.logo }} style={styles.logo} />
+                <Text style={[styles.data, styles.text]}>{team.team.name}</Text>
               </View>
-              
-              {/* Table Data */}
-              {standingsData.response[0].league.standings[0].map((team, index) => (
-                team.rank < 11 && (
-                  <View key={team.team.id} style={[styles.row, index % 2 === 0 ? styles.lightGrayRow : {}]}>
-                    <Text style={[styles.data, { flex: 1, textAlign: 'center' }, styles.text]}>{team.rank}</Text>
-                    <View style={[styles.team, { flex: 3, alignItems: 'center' }, styles.text]}>
-                      <Image source={{ uri: team.team.logo }} style={styles.logo} />
-                      <Text style={[styles.data, styles.text]}>{team.team.name}</Text>
-                    </View>
-                    <Text style={[styles.data, { flex: 2, textAlign: 'center' }, styles.text]}>{team.all.played}</Text>
-                    <Text style={[styles.data, { flex: 2, textAlign: 'center' }, styles.text]}>{team.points}</Text>
-                  </View>
-                )
-              ))}
+              <Text style={[styles.data, { flex: 2, textAlign: 'center' }, styles.text]}>{team.all.played}</Text>
+              <Text style={[styles.data, { flex: 2, textAlign: 'center' }, styles.text]}>{team.points}</Text>
             </View>
-          ) : (
-            <Text style={styles.loadingText}>Loading data...</Text>
-          )}
+          )
+        ))}
+      </View>
+    ) : (
+      <Text style={styles.loadingText}>Loading data...</Text>
+    )}
 
-            <Button
-              title="View full table"
-              color="black"
-              onPress={() => alert('View full table button pressed')}
-            />
-          </View>
+      <Button
+        title="View full table"
+        color="black"
+        onPress={() => alert('View full table button pressed')}
+      />
+    </View>
   );
 }
 
