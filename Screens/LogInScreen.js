@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LogInScreen({ navigation }) {
   const [user, setUsername] = useState('');
@@ -16,8 +17,9 @@ export default function LogInScreen({ navigation }) {
     }
 
     try {
-      const response = await axios.post('http://192.168.1.5:1337/login', { user, pwd });
-      console.log(response.data);
+      const response = await axios.post('http://192.168.228.160:1337/login', { user, pwd });
+      console.log(response.data.accessToken);
+      await AsyncStorage.setItem('accessToken',response.data.accessToken);
       // Handle successful login, navigate to home page
       navigation.navigate('Forum');
     } catch (error) {

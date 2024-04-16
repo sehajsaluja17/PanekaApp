@@ -46,7 +46,7 @@ export default function ProfileScreen({ navigation }) {
     }
 
     try {
-      const response = await axios.post('http://192.168.1.5:1337/register', { fname, lname, user, pwd });
+      const response = await axios.post('http://192.168.228.160:1337/register', { fname, lname, user, pwd });
       console.log(response.data);
       // Assuming the response contains data on success
       if (response && response.data) {
