@@ -14,8 +14,8 @@ export default function AboutScreen({ navigation }) {
       <View style={styles.firstPara}>
         <Text style={styles.titleText}>How this site came to be</Text>
         <Text style={styles.normal}>
-          We're a team of four programmers who built this website as a college project using React. 
-          Our common interest in football helped us conceptualize a website that could act as a one-stop shop for everything football.
+          We're a team of four programmers who built this application as a college project using React Native. 
+          Our common interest in football helped us conceptualize an application that could act as a one-stop shop for everything football.
         </Text>
       </View>
       <View>
@@ -23,7 +23,7 @@ export default function AboutScreen({ navigation }) {
         <Text style={styles.normal}>
           Since our reach is restricted to the fans of the English Premier League, our first goal is to cover football leagues from across the globe.
           We plan to expand our chat room to a full fledged forum where users can create posts and discuss all things football. We also wish to add
-          a live news feed so users can read the latest news directly on our website.
+          a live news feed so users can read the latest news directly on our app.
         </Text>
       </View>
     </View>
