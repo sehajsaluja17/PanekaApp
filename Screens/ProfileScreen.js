@@ -109,7 +109,7 @@ export default function ProfileScreen({ navigation }) {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
