@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, Image, Button, ActivityIndicator, TouchableOpacity, useWindowDimensions } from 'react-native';
 import axios from 'axios';
 import Carousel from 'react-native-snap-carousel';
+import FixturesHome from '../Components/FixturesHome'; 
+import StandingsHome from '../Components/StandingsHome';
+
+
 
 export default function HomeScreen({ navigation }) {
   const data = [
@@ -22,7 +26,7 @@ export default function HomeScreen({ navigation }) {
         const axiosConfig = {
           headers: {
             'x-rapidapi-host': 'v3.football.api-sports.io',
-            'x-rapidapi-key': '4f0e9e0980cb6569267d47cb121f80e9',
+            'x-rapidapi-key': '9f0f05cf1d2067d0c4d54561d75637fc',
           },
         };
         const response = await axios.get(apiUrl, axiosConfig);
@@ -76,47 +80,19 @@ export default function HomeScreen({ navigation }) {
             loop={true}
           />
           
+          <View>
+            {/* FixtureHome component */}
+            <FixturesHome /> 
+          </View>
+
           {/* Blank line */}
           <View style={{ marginVertical: 20 }} />
-          <View style={styles.tableContainer}>
-            <Text style={[styles.tableTitle, styles.text]}>STANDINGS</Text>          
 
-            {/* Table Data */}
-            {standingsData && standingsData.response && standingsData.response[0] && standingsData.response[0].league && standingsData.response[0].league.standings ? (
-            <View style={styles.container}>
-              {/* Table Headings */}
-              <View style={[styles.row, styles.headingRow]}>
-                <Text style={[styles.header, styles.headingText, { flex: 1 }]}>Pos</Text>
-                <Text style={[styles.header, styles.headingText, { flex: 3 }]}>Team</Text>
-                <Text style={[styles.header, styles.headingText, { flex: 2 }]}>Matches Played</Text>
-                <Text style={[styles.header, styles.headingText, { flex: 2 }]}>Points</Text>
-              </View>
-              
-              {/* Table Data */}
-              {standingsData.response[0].league.standings[0].map((team, index) => (
-                team.rank < 11 && (
-                  <View key={team.team.id} style={[styles.row, index % 2 === 0 ? styles.lightGrayRow : {}]}>
-                    <Text style={[styles.data, { flex: 1, textAlign: 'center' }, styles.text]}>{team.rank}</Text>
-                    <View style={[styles.team, { flex: 3, alignItems: 'center' }, styles.text]}>
-                      <Image source={{ uri: team.team.logo }} style={styles.logo} />
-                      <Text style={[styles.data, styles.text]}>{team.team.name}</Text>
-                    </View>
-                    <Text style={[styles.data, { flex: 2, textAlign: 'center' }, styles.text]}>{team.all.played}</Text>
-                    <Text style={[styles.data, { flex: 2, textAlign: 'center' }, styles.text]}>{team.points}</Text>
-                  </View>
-                )
-              ))}
-            </View>
-          ) : (
-            <Text style={styles.loadingText}>Loading data...</Text>
-          )}
+          {/* StandingsHome component */}
+          <StandingsHome standingsData={standingsData} />
 
-            <Button
-              title="View full table"
-              color="black"
-              onPress={() => alert('View full table button pressed')}
-            />
-          </View>
+          {/* Fantasy News */}
+          
         </ScrollView>
       )}
     </View>
@@ -134,13 +110,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 10,
+    fontFamily: 'JockeyOne',
+  },
+  gridTry: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   tableContainer: {
     marginBottom: 20,
   },
   tableTitle: {
     fontFamily: 'JockeyOne',
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 10,
   },
@@ -169,15 +151,20 @@ const styles = StyleSheet.create({
   },
   team: {
     flex: 3,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  teamName: {
+    fontFamily: 'JockeyOne',
+    textAlign: 'center',
   },
   headingRow: {
     backgroundColor: 'white',
   },
   headingText: {
-    fontFamily: 'JockeyOne',
     textAlign: 'center',
+    fontWeight: 'bold',
   },
   lightGrayRow: {
     backgroundColor: '#f9f9f9',
