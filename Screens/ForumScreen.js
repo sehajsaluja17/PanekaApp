@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Button, TouchableOpacity } from 'react-native';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ForumScreen = () => {
+  const navigation = useNavigation(); 
+
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const accessToken = await AsyncStorage.getItem('accessToken');
-        const response = await axios.get('http://192.168.228.160:1337/posts', {
+        const response = await axios.get('https://paneka-backend.onrender.com/posts', {
           headers: {
             Authorization: `Bearer ${accessToken}`
           }
         });
         setPosts(response.data);
-        // console.log(response.data);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -34,23 +36,32 @@ const ForumScreen = () => {
     }
   };
 
+  const handleCreatePost = () => {
+    // Navigate to the screen where you create a new post
+    navigation.navigate('CreatePostScreen');
+  };
+
+  const handlePostPress = (postId) => {
+    // Navigate to CommentScreen with the post ID as a parameter
+    navigation.navigate('CommentScreen', { postId });
+  };
+
   const renderItem = ({ item }) => (
-    <View style={styles.post}>
-      <Text style={styles.postTitle}>{item.title}</Text>
-      <Text style={styles.postAuthor}>Author: {item.author.username}</Text>
-      <Text style={styles.postContent}>Upvotes: {item.upvotes.length}</Text>
-      <Text style={styles.postContent}>Time: {new Date(item.time).toLocaleString()}</Text>
-      {/* Render other post details */}
-    </View>
+    <TouchableOpacity onPress={() => handlePostPress(item._id)}>
+      <View style={styles.post}>
+        <Text style={styles.postTitle}>{item.title}</Text>
+        <Text style={styles.postAuthor}>Author: {item.author.username}</Text>
+        <Text style={styles.postContent}>Upvotes: {item.upvotes.length}</Text>
+        <Text style={styles.postContent}>Time: {new Date(item.time).toLocaleString()}</Text>
+        {/* Render other post details */}
+      </View>
+    </TouchableOpacity>
   );
   
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Forum</Text>
-      </View>
       <View style={styles.buttonsContainer}>
-        <Button title="Create Post" onPress={() => {}} />
+        <Button title="Create Post" onPress={handleCreatePost} />
         <Button title="Logout" onPress={handleLogout} />
       </View>
       <FlatList

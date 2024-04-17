@@ -17,7 +17,7 @@ export default function LogInScreen({ navigation }) {
     }
 
     try {
-      const response = await axios.post('http://192.168.228.160:1337/login', { user, pwd });
+      const response = await axios.post('https://paneka-backend.onrender.com/login', { user, pwd });
       console.log(response.data.accessToken);
       await AsyncStorage.setItem('accessToken',response.data.accessToken);
       // Handle successful login, navigate to home page
