@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   postTitle:{
     fontSize: 16,
-    fontWeight:'bold'
+    fontWeight:bold
   }
   // Add styles for other post details
 });
