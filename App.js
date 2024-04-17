@@ -17,6 +17,8 @@ import NewsScreen from "./Screens/NewsScreen";
 import ClubScreen from "./Screens/ClubScreen";
 import DrawerContent from "./DrawerContent";
 import LogInScreen from "./Screens/LogInScreen";
+import CreatePostScreen from "./Screens/CreatePostScreen";
+import CommentScreen from "./Screens/CommentScreen";
 
 async function loadFonts() {
   await Font.loadAsync({
@@ -107,6 +109,8 @@ export default function App(){
       <Stack.Navigator initialRouteName="TabNavigator" screenOptions={{headerShown: false}}>
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
         <Stack.Screen name="Login" component={LogInScreen} />
+        <Stack.Screen name="CreatePostScreen" component={CreatePostScreen}/>
+        <Stack.Screen name="CommentScreen" component={CommentScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

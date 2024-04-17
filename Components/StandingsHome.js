@@ -1,8 +1,10 @@
 // StandingsHome.js
 import React from 'react';
-import { View, Text, StyleSheet,Button, Image } from 'react-native';
+import { View, Text, StyleSheet,Button, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const StandingsHome = ({ standingsData }) => {
+  const navigation = useNavigation(); 
   return (
     <View style={styles.tableContainer}>
       <Text style={[{fontSize: 25},styles.tableTitle, styles.text]}>Standings</Text>          
@@ -36,12 +38,12 @@ const StandingsHome = ({ standingsData }) => {
     ) : (
       <Text style={styles.loadingText}>Loading data...</Text>
     )}
-
-      <Button
-        title="View full table"
-        color="black"
-        onPress={() => alert('View full table button pressed')}
-      />
+      <TouchableOpacity
+      style={styles.button}
+      onPress={() => navigation.navigate('Standing')}
+    >
+      <Text style={styles.buttonText}>View full table</Text>
+    </TouchableOpacity>
     </View>
   );
 }
@@ -105,6 +107,24 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
   },
+  button: {
+    backgroundColor: '#E73725',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginTop: 10,
+    elevation: 2, // for Android shadow
+    shadowColor: '#000', // for iOS shadow
+    shadowOffset: { width: 0, height: 2 }, // for iOS shadow
+    shadowOpacity: 0.25, // for iOS shadow
+    shadowRadius: 3.84, // for iOS shadow
+  },
+  buttonText:{
+    color: '#fff',
+    fontFamily: 'JockeyOne',
+    textAlign: 'center',
+    fontSize: 25,
+  }
 });
 
 export default StandingsHome;
