@@ -49,7 +49,7 @@ const DrawerNavigator = () => {
         <Drawer.Screen name="Fixture" component={FixtureScreen} options={{}}/>
         <Drawer.Screen name="Standing" component={StandingScreen} options={{}}/>
         {/* <Drawer.Screen name="Forum" component={ForumScreen} options={{}}/> */}
-        <Drawer.Screen name="News" component={NewsScreen} options={{}}/>
+        {/* <Drawer.Screen name="News" component={NewsScreen} options={{}}/> */}
         <Drawer.Screen name="Clubs" component={ClubScreen} options={{}}/>
         <Drawer.Screen name="About Us" component={AboutScreen} options={{}}/>
       </Drawer.Navigator>

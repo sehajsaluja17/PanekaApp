@@ -30,7 +30,7 @@ const ForumScreen = () => {
   const handleLogout = async () => {
     try {
       await AsyncStorage.removeItem('accessToken');
-      // You can navigate to the login screen or any other desired screen
+      navigation.navigate('Login'); 
     } catch (error) {
       console.error('Error logging out:', error);
     }

@@ -27,7 +27,7 @@ export default function HomeScreen({ navigation }) {
         const axiosConfig = {
           headers: {
             'x-rapidapi-host': 'v3.football.api-sports.io',
-            'x-rapidapi-key': '9f0f05cf1d2067d0c4d54561d75637fc',
+            'x-rapidapi-key': 'ef407cca5a83183c13738297c6aedc4b',
           },
         };
         const response = await axios.get(apiUrl, axiosConfig);
